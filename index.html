@@ -21,73 +21,46 @@
       padding: 20px;
     }
 
-    /* HEADER with logos at the edges */
+    /* HEADER con logos a los lados y texto centrado */
     .header {
       display: flex;
-      justify-content: center;   /* texto centrado horizontalmente */
-      align-items: flex-start;   /* logos arriba */
+      justify-content: space-between;
+      align-items: flex-start; /* logos arriba */
       flex-wrap: wrap;
-      padding: 10px 0;           /* espacio arriba y abajo reducido */
-      position: relative;
+      padding: 20px 0;      /* espacio arriba y abajo */
       box-sizing: border-box;
+      position: relative;
     }
 
     .header-text {
+      flex: 1;
       text-align: center;
-      margin: 0 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+      min-width: 300px;
+      margin: 0 20px; /* espacio entre texto y logos */
     }
 
     .header-text h1 {
-      font-size: 2.5em;
+      font-size: 2em;
       margin: 0 0 5px 0;
     }
 
     .authors {
-      font-size: 1.5em;
+      font-size: 1.2em;
       margin: 0;
-      padding: 0;
-      line-height: 1.3;
+      line-height: 1.4;
     }
 
     .authors span {
-      display: block; /* dos líneas de autores */
+      display: block; /* cada línea de autores */
     }
 
-    /* Logos */
     .logo {
-      width:250px;
+      width: 120px;  /* más pequeño */
       height: auto;
       margin: 0;
+      align-self: flex-start; /* se alinea arriba del header */
     }
 
-    /* Logo izquierdo (blanco) con sombra para contraste */
-    .header img:first-child {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 10;
-      height: auto;
-      border: none;
-      background-color: #0a2a47;
-      /*filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.7));*/
-    }
-
-    /* Logo derecho */
-    .header img:last-child {
-      position: absolute;
-      top: 50;
-      right: 0;
-      width: 250px;
-      height: auto;
-      border: none;
-      background-color: #0a2a47
-    }
-
-    /* Secciones */
     h2 {
       color: #ffffff;
       font-size: 1.5em;
@@ -97,7 +70,7 @@
     /* PDF viewers */
     .pdf-viewer-article, .pdf-viewer-poster {
       margin: 20px 0;
-      border: 1px solid #ccc;
+      border: 1px solid #0a2a47; /* mismo color que fondo para que no se vea */
       border-radius: 8px;
       overflow: auto;
       background: #ffffff;
@@ -141,10 +114,10 @@
     /* Responsive */
     @media screen and (max-width: 1200px) {
       .logo {
-        width: 200px;
+        width: 80px;
       }
       .header-text h1 {
-        font-size: 2em;
+        font-size: 1.5em;
       }
       .authors {
         font-size: 1em;
@@ -194,3 +167,4 @@
 
 </body>
 </html>
+
