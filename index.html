@@ -133,48 +133,38 @@
       text-decoration: underline;
     }
 
-    /* Responsive para celulares */
-    @media screen and (max-width: 768px) {
-  /* Logos */
-      .logo {
-        width: 100px;
-        height: auto;
-        margin: 0;
-      }
-  
-      .header img:first-child {
-        position: relative;
-        top: 10px;
-        left: 0px;
-        width: 10px;
-        height: auto;
-      }
-  
-      .header img:last-child {
-        position: relative;
-        top: 10px;
-        right: 0px;
-        width: 10px;
-        height: auto;
-      }
+/* Responsive para celulares */
+@media screen and (max-width: 768px) {
+  /* El header ahora apila verticalmente */
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    
-      /* Texto más compacto */
-      .header-text h1 {
-        font-size: 1.6em; /* un poco más chico */
-      }
-      .authors {
-        font-size: 0.9em;
-      }
-    
-      /* PDF más pequeños en celular */
-      .pdf-viewer-article {
-        height: 350px;   /* antes 400px */
-      }
-      .pdf-viewer-poster {
-        height: 150px;   /* antes 200px */
-      }
-    }
+  /* Logos más pequeños */
+  .logo {
+    width: 80px;   /* antes 100px */
+    height: auto;
+    margin: 5px 0; /* espacio entre logo y texto */
+    position: static; /* quita posiciones absolutas */
+  }
+
+  /* Texto más compacto */
+  .header-text h1 {
+    font-size: 1.6em;
+  }
+  .authors {
+    font-size: 0.9em;
+  }
+
+  /* PDF más pequeños en celular */
+  .pdf-viewer-article {
+    height: 350px;
+  }
+  .pdf-viewer-poster {
+    height: 150px;
+  }
+}
   </style>
 </head>
 <body>
@@ -222,6 +212,7 @@
 
 </body>
 </html>
+
 
 
 
