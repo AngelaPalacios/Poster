@@ -133,26 +133,31 @@
       text-decoration: underline;
     }
 
-    /* Responsive */
+    /* Responsive para celulares */
     @media screen and (max-width: 768px) {
+      /* Logos más pequeños */
       .logo {
-        width: 120px;
-      }
-      .header-text h1 {
-        font-size: 1.8em;
-      }
-      .authors {
-        font-size: 1em;
+        width: 80px;   /* antes 120px */
       }
       .header img:first-child,
       .header img:last-child {
-        width: 120px;
+        width: 80px;   /* antes 120px */
       }
+    
+      /* Texto más compacto */
+      .header-text h1 {
+        font-size: 1.6em; /* un poco más chico */
+      }
+      .authors {
+        font-size: 0.9em;
+      }
+    
+      /* PDF más pequeños en celular */
       .pdf-viewer-article {
-        height: 400px;
+        height: 350px;   /* antes 400px */
       }
       .pdf-viewer-poster {
-        height: 200px;
+        height: 150px;   /* antes 200px */
       }
     }
   </style>
@@ -202,6 +207,7 @@
 
 </body>
 </html>
+
 
 
 
