@@ -24,10 +24,10 @@
     /* HEADER with logos at the edges */
     .header {
       display: flex;
-      justify-content: center;   /* texto centrado horizontalmente */
-      align-items: flex-start;   /* logos arriba */
+      justify-content: center;
+      align-items: flex-start;
       flex-wrap: wrap;
-      padding: 10px 0;           /* espacio arriba y abajo reducido */
+      padding: 10px 0;
       position: relative;
       box-sizing: border-box;
     }
@@ -39,6 +39,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+      z-index: 2;
     }
 
     .header-text h1 {
@@ -58,17 +59,16 @@
     }
 
     h1 span {
-    display: block;
+      display: block;
     }
     
     /* Logos */
     .logo {
-      width:600px;
+      width: 400px;
       height: auto;
       margin: 0;
     }
 
-    /* Logo izquierdo (blanco) con sombra para contraste */
     .header img:first-child {
       position: absolute;
       top: 0;
@@ -77,18 +77,16 @@
       height: auto;
       border: none;
       background-color: #0a2a47;
-      /*filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.7));*/
     }
 
-    /* Logo derecho */
     .header img:last-child {
       position: absolute;
-      top: 50;
+      top: 0;
       right: 0;
       width: 400px;
       height: auto;
       border: none;
-      background-color: #0a2a47
+      background-color: #0a2a47;
     }
 
     /* Secciones */
@@ -101,7 +99,7 @@
     /* PDF viewers */
     .pdf-viewer-article, .pdf-viewer-poster {
       margin: 20px 0;
-      border: 1px solid #ccc;
+      border: none; /* sin bordes */
       border-radius: 8px;
       overflow: auto;
       background: #ffffff;
@@ -142,56 +140,61 @@
       text-decoration: underline;
     }
 
-  /* Ajuste para tablets */
-  @media screen and (max-width: 768px) {
-    .header img:first-child,
-    .header img:last-child {
-      width: 150px;   /* mucho más pequeño */
-    }
-  
-    .header-text h1 {
-      font-size: 1.5em;
-    }
-  
-    .authors {
-      font-size: 0.9em;
-    }
-  }
+    /* Responsive */
+    @media screen and (max-width: 992px) {
+      .header {
+        flex-direction: column;
+        align-items: center;
+      }
 
-  /* Ajuste para celulares pequeños */
-  @media screen and (max-width: 480px) {
-    .header img:first-child,
-    .header img:last-child {
-      width: 100px;   /* aún más pequeño */
-    }
-  
-    .header-text h1 {
-      font-size: 1.2em;
-    }
-  
-    .authors {
-      font-size: 0.8em;
-    }
-  }
+      .header img:first-child,
+      .header img:last-child {
+        position: static;  /* quita posicion absoluta */
+        width: 200px;      /* más pequeños */
+        margin: 10px 0;
+      }
 
+      .header-text h1 {
+        font-size: 2em;
+      }
+
+      .authors {
+        font-size: 1.1em;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .header img:first-child,
+      .header img:last-child {
+        width: 120px;   /* aún más pequeños en celular */
+      }
+
+      .header-text h1 {
+        font-size: 1.5em;
+      }
+
+      .authors {
+        font-size: 0.9em;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- HEADER -->
   <div class="header">
-    <img src="logo.png" alt="Logo Blanco" class="logo">  <!-- logo izquierdo -->
+    <img src="logo2.png" alt="Logo Izquierdo" class="logo">
     <div class="header-text">
-    <h1>
-      <span>Color Space Assessment for Automatic</span>
-      <span>Chronic Wound Segmentation</span>
-    </h1>
+      <h1>
+        Color Space Assessment for <br>
+        Automatic Chronic Wound Segmentation
+      </h1>
       <p class="authors">
         <span>Angela F. Palacios-Gaxiola, Stewart R. Santos-Arce, Senior Member, IEEE</span>
         <span>Sulema Torres-Ramos, Israel Román-Godínez, Ricardo A. Salido-Ruiz</span>
       </p>
     </div>
-    <img src="laedc.png" alt="LAEDC Logo" class="logo">    <!-- logo derecho -->
+    <img src="laedc.png" alt="Logo Derecho" class="logo">
   </div>
 
   <!-- MAIN CONTENT -->
@@ -221,10 +224,6 @@
 
 </body>
 </html>
-
-
-
-
 
 
 
