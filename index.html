@@ -42,7 +42,7 @@
     }
 
     .header-text h1 {
-      font-size: 3em;
+      font-size: 2.7em;
       margin: 0 0 5px 0;
     }
 
@@ -142,18 +142,38 @@
       text-decoration: underline;
     }
 
-    /* Responsive */
-    @media screen and (max-width: 1200px) {
-      .logo {
-        width: 50px;
-      }
-      .header-text h1 {
-        font-size: 2em;
-      }
-      .authors {
-        font-size: 1em;
-      }
+  /* Ajuste para tablets */
+  @media screen and (max-width: 768px) {
+    .header img:first-child,
+    .header img:last-child {
+      width: 150px;   /* mucho más pequeño */
     }
+  
+    .header-text h1 {
+      font-size: 1.5em;
+    }
+  
+    .authors {
+      font-size: 0.9em;
+    }
+  }
+
+  /* Ajuste para celulares pequeños */
+  @media screen and (max-width: 480px) {
+    .header img:first-child,
+    .header img:last-child {
+      width: 100px;   /* aún más pequeño */
+    }
+  
+    .header-text h1 {
+      font-size: 1.2em;
+    }
+  
+    .authors {
+      font-size: 0.8em;
+    }
+  }
+
   </style>
 </head>
 <body>
@@ -201,6 +221,7 @@
 
 </body>
 </html>
+
 
 
 
