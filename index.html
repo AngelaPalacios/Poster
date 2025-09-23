@@ -18,33 +18,43 @@
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 15px;
+      padding: 20px;
     }
 
-    /* HEADER mobile-first */
+    /* HEADER */
     .header {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 20px 0;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 10px 0;
+      position: relative;
+      box-sizing: border-box;
     }
 
-    .header img {
-      width: 120px;
-      height: auto;
-      margin: 5px 0;
+    .header-text {
+      text-align: center;
+      margin: 0 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
 
     .header-text h1 {
-      font-size: 1.6em;
-      margin: 10px 0;
+      font-size: 2em;
+      margin: 0 0 5px 0;
       line-height: 1.2;
     }
 
+    h1 span {
+      display: block; /* título en dos renglones */
+    }
+
     .authors {
-      font-size: 0.95em;
+      font-size: 1em;
       margin: 0;
+      padding: 0;
       line-height: 1.3;
     }
 
@@ -52,10 +62,33 @@
       display: block;
     }
 
+    /* Logos */
+    .logo {
+      width: 100px;
+      height: auto;
+      margin: 0;
+    }
+
+    .header img:first-child {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 100px;
+      height: auto;
+    }
+
+    .header img:last-child {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 100px;
+      height: auto;
+    }
+
     /* Secciones */
     h2 {
       color: #ffffff;
-      font-size: 1.2em;
+      font-size: 1.3em;
       margin-top: 20px;
     }
 
@@ -70,11 +103,11 @@
     }
 
     .pdf-viewer-article {
-      height: 500px;
+      height: 400px;
     }
 
     .pdf-viewer-poster {
-      height: 300px;
+      height: 200px; /* pequeño en móvil */
     }
 
     .pdf-viewer-article iframe,
@@ -85,14 +118,14 @@
       display: block;
     }
 
-    /* References */
     .references {
-      margin-top: 25px;
-      padding: 10px;
+      margin-top: 30px;
+      padding: 15px;
       text-align: justify;
       color: #ffffff;
-      border-left: 3px solid #ffffff;
-      font-size: 0.9em;
+      border-left: 4px solid #ffffff;
+      font-size: 1em;
+      background: none;
     }
 
     a {
@@ -104,45 +137,40 @@
       text-decoration: underline;
     }
 
-    /* Tablets */
+    /* Tablet */
     @media screen and (min-width: 600px) {
-      .header img {
-        width: 200px;
-      }
       .header-text h1 {
-        font-size: 2em;
+        font-size: 2.3em;
       }
       .authors {
-        font-size: 1.1em;
+        font-size: 1.2em;
+      }
+      .header img:first-child,
+      .header img:last-child {
+        width: 150px;
+      }
+      .pdf-viewer-poster {
+        height: 300px;
       }
     }
 
     /* Desktop */
     @media screen and (min-width: 992px) {
-      .header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-        position: relative;
-      }
-
-      .header img {
-        width: 250px;
-        margin: 0 20px;
-      }
-
-      .header-text {
-        flex: 1;
-        margin: 0 20px;
-      }
-
       .header-text h1 {
-        font-size: 2.5em;
+        font-size: 2.7em;
       }
-
       .authors {
-        font-size: 1.3em;
+        font-size: 1.5em;
+      }
+      .header img:first-child,
+      .header img:last-child {
+        width: 200px;
+      }
+      .pdf-viewer-article {
+        height: 600px;
+      }
+      .pdf-viewer-poster {
+        height: 500px;
       }
     }
   </style>
@@ -154,15 +182,15 @@
     <img src="logo2.png" alt="Logo Izquierdo" class="logo">
     <div class="header-text">
       <h1>
-        Color Space Assessment for <br>
-        Automatic Chronic Wound Segmentation
+        <span>Color Space Assessment for</span>
+        <span>Automatic Chronic Wound Segmentation</span>
       </h1>
       <p class="authors">
         <span>Angela F. Palacios-Gaxiola, Stewart R. Santos-Arce, Senior Member, IEEE</span>
         <span>Sulema Torres-Ramos, Israel Román-Godínez, Ricardo A. Salido-Ruiz</span>
       </p>
     </div>
-    <img src="laedc.png" alt="Logo Derecho" class="logo">
+    <img src="logo.png" alt="Logo Derecho" class="logo">
   </div>
 
   <!-- MAIN CONTENT -->
@@ -174,7 +202,7 @@
 
     <h2>🖼️ Poster</h2>
     <div class="pdf-viewer-poster">
-      <iframe src="poster.pdf#zoom=30"></iframe>
+      <iframe src="poster.pdf#zoom=50"></iframe>
     </div>
 
     <h2>📚 References</h2>
@@ -192,14 +220,6 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
