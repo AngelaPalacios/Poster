@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 👈 importante para móviles -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Color Space Assessment for Automatic Chronic Wound Segmentation</title>
 
+  <!-- Fuente -->
   <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
 
   <style>
@@ -33,86 +34,38 @@
       box-sizing: border-box;
     }
 
-    .header-text {
-      text-align: center;
-      margin: 0 20px;
-    }
-
-    .header-text h1 {
-      font-size: 2.7em;
-      margin: 0 0 5px 0;
-      line-height: 1.2;
-    }
-
-    h1 span {
-      display: block; /* título en dos renglones */
-    }
-
-    .authors {
-      font-size: 1.5em;
-      margin: 0;
-      padding: 0;
-      line-height: 1.3;
-    }
-
-    .authors span {
-      display: block;
-    }
+    .header-text { text-align: center; margin: 0 20px; }
+    .header-text h1 { font-size: 2.7em; margin: 0 0 5px 0; line-height: 1.2; }
+    h1 span { display: block; }
+    .authors { font-size: 1.5em; margin: 0; padding: 0; line-height: 1.3; }
+    .authors span { display: block; }
 
     /* Logos en desktop */
-    .logo {
-      width: 500px;
-      height: auto;
-      margin: 0;
-    }
-
-    .header img:first-child {
-      position: absolute;
-      top: 10px;
-      left: 0px;
-      width: 390px;
-      height: auto;
-    }
-
-    .header img:last-child {
-      position: absolute;
-      top: 10px;
-      right: 0px;
-      width: 390px;
-      height: auto;
-    }
+    .logo { width: 500px; height: auto; margin: 0; }
+    .header img:first-child { position: absolute; top: 10px; left: 0px; width: 390px; }
+    .header img:last-child  { position: absolute; top: 10px; right: 0px; width: 390px; }
 
     /* Secciones */
-    h2 {
-      color: #ffffff;
-      font-size: 1.5em;
-      margin-top: 20px;
-    }
+    h2 { color: #ffffff; font-size: 1.5em; margin-top: 20px; }
 
-    /* PDF viewers */
+    /* PDF viewers (contenedores donde PDF.js renderiza) */
     .pdf-viewer-article,
     .pdf-viewer-poster {
       margin: 20px 0;
-      border: none;
       border-radius: 8px;
       overflow: auto;
       background: #ffffff;
+      padding: 12px;
+      box-sizing: border-box;
+      min-height: 120px; /* por si tarda en cargar */
     }
 
-    .pdf-viewer-article {
-      height: 800px;
-    }
-
-    .pdf-viewer-poster {
-      height: 600px;
-    }
-
-    .pdf-viewer-article iframe,
-    .pdf-viewer-poster iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    /* Cada canvas (página) */
+    .pdf-page-canvas {
       display: block;
+      margin: 0 auto 12px auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      background: white;
     }
 
     .references {
@@ -125,49 +78,23 @@
       background: none;
     }
 
-    a {
-      color: #00bfff;
-      text-decoration: none;
-    }
+    a { color: #00bfff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Responsive para celulares */
+    /* Responsive */
     @media screen and (max-width: 768px) {
-      /* Header apilado */
-      .header {
-        flex-direction: column;
-        align-items: center;
-        position: static; /* quita relativo para no heredar absolute */
-      }
-
-      /* Logos más chicos y centrados */
-      .header img {
-        position: static !important;
-        width: 120px;
-        height: auto;
-        margin: 10px 0;
-      }
-
-      /* Texto más compacto */
-      .header-text h1 {
-        font-size: 1.4em;
-      }
-      .authors {
-        font-size: 0.9em;
-        text-align: center;
-      }
-
-      /* PDFs reducidos */
-      .pdf-viewer-article {
-        height: 350px;
-      }
-      .pdf-viewer-poster {
-        height: 200px;
-      }
+      .header { flex-direction: column; align-items: center; position: static; }
+      .header img { position: static !important; width: 120px; margin: 10px 0; }
+      .header-text h1 { font-size: 1.4em; }
+      .authors { font-size: 0.9em; text-align: center; }
+      /* menos altura mínima: el contenido será scrollable */
+      .pdf-viewer-article { min-height: 220px; }
+      .pdf-viewer-poster  { min-height: 140px; }
     }
+
+    /* Mensajes */
+    .loading { padding: 20px; color: #222; text-align: center; }
+    .error { color: red; padding: 12px; }
   </style>
 </head>
 <body>
@@ -191,13 +118,13 @@
   <!-- MAIN CONTENT -->
   <div class="container">
     <h2>📄 Article</h2>
-    <div class="pdf-viewer-article">
-      <iframe src="articulo.pdf#zoom=100"></iframe>
+    <div class="pdf-viewer-article" id="articleContainer">
+      <div class="loading">Cargando artículo…</div>
     </div>
 
     <h2>🖼️ Poster</h2>
-    <div class="pdf-viewer-poster">
-      <iframe src="poster.pdf#zoom=30"></iframe>
+    <div class="pdf-viewer-poster" id="posterContainer">
+      <div class="loading">Cargando póster…</div>
     </div>
 
     <h2>📚 References</h2>
@@ -213,28 +140,95 @@
     </div>
   </div>
 
-  <!-- SCRIPT para ajustar zoom de PDFs -->
+  <!-- PDF.js desde CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
-    function ajustarZoomPDF() {
-      const ancho = window.innerWidth;
+    // Configurar worker (URL al worker del mismo CDN)
+    const pdfjsLib = window['pdfjs-dist/build/pdf'] || window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
-      const articulo = document.querySelector(".pdf-viewer-article iframe");
-      const poster = document.querySelector(".pdf-viewer-poster iframe");
+    const articleUrl = 'articulo.pdf'; // tu archivo
+    const posterUrl  = 'poster.pdf';
 
-      if (ancho <= 768) {
-        // En móviles
-        if (articulo) articulo.src = "articulo.pdf#zoom=70";  // menos zoom
-        if (poster) poster.src = "poster.pdf#zoom=20";        // menos zoom
-      } else {
-        // En desktop
-        if (articulo) articulo.src = "articulo.pdf#zoom=100";
-        if (poster) poster.src = "poster.pdf#zoom=30";
+    // Mantener el estado de qué breakpoint se ha renderizado
+    let lastMode = null; // 'mobile' o 'desktop'
+
+    // Renderiza todas las páginas de un PDF en el contenedor dado con el scale indicado
+    async function renderPDFToContainer(url, containerEl, scale) {
+      containerEl.innerHTML = '<div class="loading">Cargando PDF…</div>';
+      try {
+        const loadingTask = pdfjsLib.getDocument(url);
+        const pdf = await loadingTask.promise;
+
+        // limpiar
+        containerEl.innerHTML = '';
+
+        for (let p = 1; p <= pdf.numPages; p++) {
+          const page = await pdf.getPage(p);
+          const viewport = page.getViewport({ scale });
+
+          // Canvas DOM
+          const canvas = document.createElement('canvas');
+          canvas.className = 'pdf-page-canvas';
+
+          const context = canvas.getContext('2d');
+
+          // Ajuste de devicePixelRatio para nitidez en pantallas retina
+          const DPR = window.devicePixelRatio || 1;
+          canvas.width  = Math.floor(viewport.width * DPR);
+          canvas.height = Math.floor(viewport.height * DPR);
+          canvas.style.width  = Math.floor(viewport.width) + 'px';
+          canvas.style.height = Math.floor(viewport.height) + 'px';
+
+          // Escalar el contexto para DPR
+          context.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+          containerEl.appendChild(canvas);
+
+          // Renderizar
+          await page.render({ canvasContext: context, viewport }).promise;
+        }
+      } catch (err) {
+        console.error('Error cargando PDF:', err);
+        containerEl.innerHTML = '<p class="error">No se pudo cargar el PDF — se mostrará un iframe como fallback.</p>';
+        // fallback sencillo: iframe
+        const fallbackIframe = document.createElement('iframe');
+        fallbackIframe.src = url + '#zoom=70';
+        fallbackIframe.style.width = '100%';
+        fallbackIframe.style.height = '400px';
+        fallbackIframe.style.border = 'none';
+        containerEl.appendChild(fallbackIframe);
       }
     }
 
-    // Ejecutar al cargar y al redimensionar
-    window.addEventListener("load", ajustarZoomPDF);
-    window.addEventListener("resize", ajustarZoomPDF);
+    // Decide escalas según ancho de pantalla y renderiza si cambia el modo
+    function decideAndRender() {
+      const ancho = window.innerWidth;
+      const isMobile = ancho <= 768;
+      const mode = isMobile ? 'mobile' : 'desktop';
+      if (mode === lastMode) return; // evitar re-render innecesario
+      lastMode = mode;
+
+      // Escalas (ajusta estos valores si quieres más/menos zoom)
+      const articleScale = isMobile ? 0.65 : 1.0; // artículo: 65% en móvil, 100% en desktop
+      const posterScale  = isMobile ? 0.40 : 0.60; // póster: 40% en móvil, 60% en desktop
+
+      // contenedores
+      const articleContainer = document.getElementById('articleContainer');
+      const posterContainer  = document.getElementById('posterContainer');
+
+      // Renderizar (no await para que corran en paralelo)
+      renderPDFToContainer(articleUrl, articleContainer, articleScale);
+      renderPDFToContainer(posterUrl, posterContainer, posterScale);
+    }
+
+    // Ejecutar al cargar y al cambiar tamaño (con debounce)
+    window.addEventListener('load', decideAndRender);
+    let _resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(decideAndRender, 300);
+    });
   </script>
 </body>
 </html>
