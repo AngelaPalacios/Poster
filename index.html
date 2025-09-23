@@ -213,9 +213,31 @@
     </div>
   </div>
 
+  <!-- SCRIPT para ajustar zoom de PDFs -->
+  <script>
+    function ajustarZoomPDF() {
+      const ancho = window.innerWidth;
+
+      const articulo = document.querySelector(".pdf-viewer-article iframe");
+      const poster = document.querySelector(".pdf-viewer-poster iframe");
+
+      if (ancho <= 768) {
+        // En móviles
+        if (articulo) articulo.src = "articulo.pdf#zoom=70";  // menos zoom
+        if (poster) poster.src = "poster.pdf#zoom=20";        // menos zoom
+      } else {
+        // En desktop
+        if (articulo) articulo.src = "articulo.pdf#zoom=100";
+        if (poster) poster.src = "poster.pdf#zoom=30";
+      }
+    }
+
+    // Ejecutar al cargar y al redimensionar
+    window.addEventListener("load", ajustarZoomPDF);
+    window.addEventListener("resize", ajustarZoomPDF);
+  </script>
 </body>
 </html>
-
 
 
 
